@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.template import loader, Context
 from votes.models import *
 from roster.models import *
+from django.contrib.auth.models import User, AnonymousUser
 
 # Create your views here.
 def index(request):
@@ -52,6 +53,7 @@ def qlist(request, lecture_num):
         question_state = active_question.question_state
         active_question_link = "/questionmonitor/%d/%d/state/" % (active_question.lecture_num, active_question.question_num)
     except Question.DoesNotExist:
+        active_question_link = ""
         active_question_text = 'None'
         question_state = 0
 

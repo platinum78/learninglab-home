@@ -47,7 +47,7 @@ def find_active_question(deactivate=False, calibrate=False):
             raise Question.DoesNotExist
 
 def close_all_questions():
-    questions = Question.objects.all()
+    questions = Question.objects.all().exclude(question_state=0)
     for question in questions:
         question.question_state = 0
         question.save()

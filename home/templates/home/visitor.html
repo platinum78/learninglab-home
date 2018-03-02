@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>:::: LearningLab Homepage - Visitor ::::</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}" />
+</head>
+<body>
+    <div class="titlebar_global"><center>Visitor Home</center></div>
+    <div class="navigationbar_global">
+        <a href="{% url 'home:student' %}">Visitor Home</a>
+    </div>
+
+    <div class="content_global">
+        <div style="font-size: 16px; text-align: center">
+            Welcome, visitor!<br>
+            Your session will be immediately deleted after logout. <br> <br>
+        </div>
+        <a class="menus" href="{% url 'votes:index' %}">In-Class Vote</a>
+    </div>
+
+    <a class="logoutbox_global" href="{% url 'home:logout' %}">Logout</a>
+
+</body>
+</html>

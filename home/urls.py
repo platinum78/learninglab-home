@@ -11,6 +11,8 @@ urlpatterns = [
     path('', views.index, name='homepage'),
     path('login/', views.login_, name='login'),
     path('logout/', views.logout_, name='logout'),
+    path('user404/', views.user404, name='user404'),
+    path('invalid_request/', views.invalid_request, name="invalid"),
 
     # student homepage / account info
     ################################################################
@@ -35,6 +37,10 @@ urlpatterns = [
     path('faculty/sysstat/classinit/<str:filename>/preview/', views.excelpreview, name="excelpreview"),
     path('faculty/sysstat/classinit/parse/filename=<str:file_name>/', views.register_students_handler),
     path('faculty/sysstat/classinit/result/', views.student_registration_result, name="register_result"),
+
+    # visitor homepage
+    ################################################################
+    path('visitor/', views.visitor, name="visitor"),
 
     # handler urls
     ################################################################

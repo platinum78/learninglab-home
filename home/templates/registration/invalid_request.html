@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Invalid Request!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}" />
+</head>
+<body>
+    <div class="titlebar_global"><center>Invalid Request!</center></div>
+    <div class="navigationbar_global">
+        Invalid Request!
+    </div>
+
+    <div class="content_global">
+        <div style="font-size: 16px; text-align: center">
+            This request is not allowed. <br>
+            <a href="{% url 'home:homepage' %}">Go to login page</a>
+        </div>
+    </div>
+
+</body>
+</html>

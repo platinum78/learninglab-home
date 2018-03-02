@@ -11,9 +11,7 @@ from .forms import *
 from roster.models import *
 from courses.models import *
 from votes.models import *
-import datetime
-import os
-import pandas
+import datetime, os, pandas, string, random
 # from somewhere import handle_uploaded_file
 
 # Create your views here.
@@ -36,44 +34,66 @@ def index(request):
     return HttpResponse(homepage_html.render(context, request))
 
 def student(request):
-    student_html = loader.get_template('home/student.html')
-    user = request.user
-    student_name = Student.objects.get(user=user).name_text_english
-    context = {
-        'student_name': student_name,
-    }
-    return HttpResponse(student_html.render(context, request))
+    try:
+        student_html = loader.get_template('home/student.html')
+        user = request.user
+        student_name = Student.objects.get(user=user).name_text_english
+        context = {
+            'student_name': student_name,
+        }
+        return HttpResponse(student_html.render(context, request))
+    except Student.DoesNotExist:
+        return redirect("home:invalid")
 
 def faculty(request):
-    # if the faculty forgot to logout previously, but somehow
-    # there is no course active, he/she should be redirected
-    # to the course selection page.
-    ################################################################
     try:
-        course = Course.objects.get(is_active=True)
-    except Course.DoesNotExist:
-        return redirect("home:selectcourse")
+        Faculty.objects.get(user=request.user)
+        # if the faculty forgot to logout previously, but somehow
+        # there is no course active, he/she should be redirected
+        # to the course selection page.
+        ################################################################
+        try:
+            course = Course.objects.get(is_active=True)
+        except Course.DoesNotExist:
+            return redirect("home:selectcourse")
 
-    # load class information from courses.models.Course model
-    ################################################################
-    course_name = course.course_name
-    class_num = course.class_num
-    course_title = str(course.year)+'-'+str(course.semester)+' '+course.course_name + " - Class " + str(course.class_num)
+        # load class information from courses.models.Course model
+        ################################################################
+        course_name = course.course_name
+        class_num = course.class_num
+        course_title = str(course.year)+'-'+str(course.semester)+' '+course.course_name + " - Class " + str(course.class_num)
 
-    # parse context and html template to the client
-    ################################################################
-    faculty_html = loader.get_template('home/faculty.html')
-    user = request.user
-    instructor_name = Faculty.objects.get(user=user).name_text_english
-    context = {
-        'instructor_name': instructor_name,
-        'course_name': course_name,
-        'course_year': course.year,
-        'course_semester': course.semester,
-        'class_num': class_num,
-        'course_title': course_title,
-    }
-    return HttpResponse(faculty_html.render(context, request))
+        # parse context and html template to the client
+        ################################################################
+        faculty_html = loader.get_template('home/faculty.html')
+        user = request.user
+        instructor_name = Faculty.objects.get(user=user).name_text_english
+        context = {
+            'instructor_name': instructor_name,
+            'course_name': course_name,
+            'course_year': course.year,
+            'course_semester': course.semester,
+            'class_num': class_num,
+            'course_title': course_title,
+        }
+        return HttpResponse(faculty_html.render(context, request))
+    except Faculty.DoesNotExist:
+        return redirect("home:invalid")
+
+def visitor(request):
+    try:
+        Visitor.objects.get(user=request.user)
+        visitor_html = loader.get_template('home/visitor.html')
+        user = request.user
+        context = {}
+        return HttpResponse(visitor_html.render(context, request))
+    except Visitor.DoesNotExist:
+        return redirect("home:invalid")
+
+def invalid_request(request):
+    invalid_request_html = loader.get_template('registration/invalid_request.html')
+    context = {}
+    return HttpResponse(invalid_request_html.render(context, request))
 
 def student_accountinfo(request):
     # find the student info from roster.models.Student model
@@ -109,7 +129,7 @@ def login_(request):
     if user is not None:
         login(request, user)
     else:
-        raise Http404('No matching user!')
+        return redirect("home:user404")
 
     try:
         Student.objects.get(user=user)
@@ -121,7 +141,7 @@ def login_(request):
         Faculty.objects.get(user=user)
         return redirect("home:selectcourse")
     except Faculty.DoesNotExist:
-        raise Http404("No matching user!")
+        return redirect("home:user404")
 
 def logout_(request):
     # deactivate all courses and questions, if the instructor logs out
@@ -144,12 +164,40 @@ def logout_(request):
     }
     return HttpResponse(logout_html.render(context, request))
 
+def user404(request):
+    context = {}
+    user404_html = loader.get_template('registration/user404.html')
+    return HttpResponse(user404_html.render(context, request))
+
+def visitor_handler(request):
+    # create 15-digit arbitrary password
+    charbank = string.ascii_uppercase + string.ascii_lowercase + string.digits
+    random_pw = "".join(random.choice(charbank) for _ in range(15))
+    user_id = request.POST["id"]
+
+    # get temporary user data and add to visitor list
+    user = User.objects.create_user(username=str(data[idx,3]),
+                                    password=str(data[idx,3]),
+                                    email=data[idx,6],
+                                    first_name=data[idx,4])
+    visitor = Visitor.objects.create(user=user,
+                                    id_text = "",
+                                    temp_password=random_pw)
+
+    user_login = authenticate(usrename=user_id, password=random_pw)
+
+    if user_login is not None:
+        login(request, user_login)
+
+def anonymoususer_logout(request):
+    user = request.user
+    user.logout(request)
+    user.delete()
+
 def sysstat(request):
     # load
     sysstat_html = loader.get_template('home/sysstat.html')
-    context = {
-        'EM2_classes': EM2_classes,
-    }
+    context = {}
     return HttpResponse(sysstat_html.render(context, request))
 
 def accounterror(request):
