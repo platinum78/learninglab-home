@@ -1,0 +1,11 @@
+# Database should kept still
+################################################################
+*.sqlite3
+
+# Python compilation cache do not have to be synced
+################################################################
+*.pyc
+
+# Automatically generated files do not have to be synced
+################################################################
+*.svg
