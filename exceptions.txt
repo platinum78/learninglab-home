@@ -1,0 +1,6 @@
+app: home
+    - main gate page: login screen shows up even if the user is logged in - resolved!
+    -
+
+app: stats
+    - graphing: unable to see the graph when no problem are active - moved menu into question management page

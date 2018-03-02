@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Authentication Error!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}" />
+</head>
+<body>
+    <!-- titlebar -->
+    <div class="titlebar_global">Authentication Error</div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">Account Error </div>
+
+    <div class="content_global">
+        An error has occured. <br>
+        You might have been logged out, or you might have been not authorized to view this page. <br>
+        Please log in with your account. <br> <br>
+
+        Please format your .xlsx file as follows. <br> <br>
+        <div style="margin: 10px 15%; width: auto;">
+            <table style="width:100%; border: 1px solid black;">
+                <tr>
+                    <th style="border: 1px solid black;">Firstname</th>
+                    <th style="border: 1px solid black;">Lastname</th>
+                    <th style="border: 1px solid black;">Age</th>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;">Jill</td>
+                    <td style="border: 1px solid black;">Smith</td>
+                    <td style="border: 1px solid black;">50</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid black;">Eve</td>
+                    <td style="border: 1px solid black;">Jackson</td>
+                    <td style="border: 1px solid black;">94</td>
+                </tr>
+            </table>
+        </div>
+
+        <a class="logoutbox_global" href="{%url 'home:homepage' %}">Login</a>
+    </div>
+</body>
+</html>

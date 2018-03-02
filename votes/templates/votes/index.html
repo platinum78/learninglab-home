@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>:::::: LearningLab Voting System ::::::</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'votes/votes_index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>LearningLab Voting System</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a href="{% url 'home:student' %}">Student Home</a> >
+        <a href="{% url 'votes:index' %}">Voting</a>
+    </div>
+
+    <div class="content_global">
+        <!-- welcome message -->
+        <div style="text-align: center; font-size: 16px; margin-bottom: 20px">
+            Welcome to LearningLab voting system. <br>
+        </div>
+
+        <!-- currently active probelm window -->
+        <div align="center">
+            <span class="activewindow">
+                Currently Active<br>[{{ active_question_text }}]
+                {% if question_state == 1 %}
+                    <br>(First Vote)
+                {% elif question_state == 2 %}
+                    <br>(Second Vote)
+                {% endif %}
+            </span>
+        </div>
+        <div style="height: 50px"> </div>
+
+        <!-- votebox -->
+        {% if is_in_current_class and question_state %}
+            <div class="votebox">
+                <form action="{% url 'votes:response' %}" method="post">
+                    {% csrf_token %}
+                    {% for idx in active_question_choice_range %}
+                        <div style="float: left; width: {{pane_width}}%" align="center">
+                            <label>
+                            <span style="font-size: 25px">{{idx}}</span> <br>
+                            <input type="radio" name="choice" id="choice{{idx}}"
+                            value="{{idx}}" style="margin-right: 5px">
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <div style="height: 30px; clear: both"> </div>
+
+                    <!-- submit button -->
+                    <div align="center">
+                        <button class="button_link" type="submit" align="center">Vote!</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

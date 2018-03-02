@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>:::: LearningLab Homepage - Student ::::</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}" />
+</head>
+<body>
+    <div class="titlebar_global"><center>Student Home</center></div>
+    <div class="navigationbar_global">
+        <a href="{% url 'home:student' %}">Student Home</a>
+    </div>
+
+    <div class="content_global">
+        <div style="font-size: 16px; text-align: center">
+            Welcome, {{student_name}} !<br>
+            You're logged in as a student. <br> <br>
+        </div>
+        <a class="menus" href="{% url 'votes:index' %}">In-Class Vote</a>
+        <a class="menus" href="">Question (Inactive) </a>
+        <a class="menus" href="https://docs.google.com/forms/d/e/1FAIpQLSfQZ_BAnhg2zAuU9wGN-JqMiHWibh5LCOrs7cNBWabqvlrQyw/viewform">Pre-Class (Google Forms) </a>
+        <a class="menus" href="{% url 'home:student_accountinfo' %}">Account Info </a>
+    </div>
+
+    <a class="logoutbox_global" href="{% url 'home:logout' %}">Logout</a>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Switch</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'questionmonitor/questionmonitor.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <div class="titlebar_global"><center>Question Switch</center></div>
+    <div class="navigationbar_global">
+        <a href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a href="{% url 'questionmonitor:index' %}">Question Switch</a> >
+        <a href="/faculty/questionmonitor/{{lecture_num}}/">Lecture {{lecture_num}}</a> >
+         Qustion {{question_num}}
+    </div>
+    <div class="content_global">
+        <span style="display: block; font-size: 15; text-align: center; font-weight: bold;">You can activate or deactivate problems here.</span>
+
+        <!-- spacer -->
+        <div style="height: 30px;"> </div>
+        <div style="display: flex; justify-content: center">
+            {% if question_state == 1 %}
+                <a class="button-active" href="/faculty/questionmonitor/{{ lecture_num }}/{{ question_num }}/secondvote/">
+                    Active<br>(First Vote)<br>Click to deactivate</a>
+            {% elif question_state == 2 %}
+                <a class="button-active" href="/faculty/questionmonitor/{{ lecture_num }}/{{ question_num }}/deactivate/">
+                    Active<br>(Second Vote)<br>Click to activate</br>
+                </a>
+            {% elif question_state == 0 %}
+                <a class="button-inactive" href="/faculty/questionmonitor/{{ lecture_num }}/{{ question_num }}/firstvote/">
+                    Inactive<br>Click to activate</br>
+                </a>
+            {% endif %}
+            <div style="width: 20px;"></div>
+            <a class="button-active" href="/stats/{{lecture_num}}/{{question_num}}/" target="_blank">Show Statistics</a>
+        </div>
+
+        <!-- spacer -->
+        <div style="height: 20px;"> </div>
+    </div>
+</body>
+</html>

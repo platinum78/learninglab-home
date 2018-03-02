@@ -1,0 +1,162 @@
+a.listbox:link, a.listbox:visited {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    margin-left:                10%;
+    margin-right:               10%;
+    padding:                    none;
+    width:                      auto;
+    height:                     46px;
+    margin-bottom:              10px;
+    color:                      white;
+    background-color:           darkblue;
+    border:                     2px solid darkblue;
+    border-radius:              10px;
+    font-size:                  18px;
+    font-weight:                bold;
+    text-decoration:            none;
+}
+
+a.listbox:hover, a.listbox:hover:visited {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    margin-left:                10%;
+    margin-right:               10%;
+    padding:                    none;
+    width:                      auto;
+    height:                     46px;
+    margin-bottom:              10px;
+    color:                      darkblue;
+    background-color:           white;
+    border:                     2px solid darkblue;
+    border-radius:              10px;
+    font-size:                  18px;
+    font-weight:                bold;
+    text-decoration:            none;
+}
+
+a.button-active:link, a.button-active:visited {
+    display: inline-flex;
+    width: 160px;
+    height: 160px;
+    background-color: tomato;
+    color: white;
+    border: solid 2px tomato;
+    border-radius: 82px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+a.button-active:hover, a.button-active:hover:visited {
+    display: inline-flex;
+    width: 160px;
+    height: 160px;
+    background-color: white;
+    color: tomato;
+    border: solid 2px tomato;
+    border-radius: 82px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+a.button-inactive:link, a.button-inactive:visited {
+    display: inline-flex;
+    width: 160px;
+    height: 160px;
+    color: white;
+    background-color: darkblue;
+    border: solid 2px darkblue;
+    border-radius: 82px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+a.button-inactive:hover, a.button-inactive:hover:visited {
+    display: flex;
+    width: 160px;
+    height: 160px;
+    background-color: white;
+    color: darkblue;
+    border: solid 2px darkblue;
+    border-radius: 82px;
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+a.button-deactivate:link, a.button-deactivate:visited {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  15px;
+    font-weight:                bold;
+    color:                      white;
+    background-color:           red;
+    border:                     2px solid red;
+    border-radius:              47px;
+    width:                      90px;
+    height:                     90px;
+    text-decoration:            none;
+}
+
+a.button-deactivate:hover, a.button-deactivate:hover:visited {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  15px;
+    font-weight:                bold;
+    color:                      red;
+    background-color:           white;
+    border:                     2px solid red;
+    border-radius:              47px;
+    width:                      90px;
+    height:                     90px;
+    text-decoration:            none;
+}
+a.button-stats:link, a.button-stats:visited {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  15px;
+    font-weight:                bold;
+    color:                      white;
+    background-color:           red;
+    border:                     2px solid red;
+    border-radius:              47px;
+    width:                      90px;
+    height:                     90px;
+    text-decoration:            none;
+}
+
+a.button-stats:hover, a.button-stats:hover:visited {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  15px;
+    font-weight:                bold;
+    color:                      red;
+    background-color:           white;
+    border:                     2px solid red;
+    border-radius:              47px;
+    width:                      90px;
+    height:                     90px;
+    text-decoration:            none;
+}

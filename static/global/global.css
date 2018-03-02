@@ -1,0 +1,297 @@
+body {
+    background-color:           lightblue;
+    padding:                    0px;
+    margin:                     0px;
+}
+
+div.titlebar_global {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      white;
+    font-weight:                normal;
+    font-size:                  30px;
+    background-color:           #009999;
+    padding-top:                25px;
+    padding-bottom:             25px;
+    margin:                     0px;
+    width:                      100%;
+}
+
+div.navigationbar_global {
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      #007777;
+    font-weight:                normal;
+    font-size:                  16px;
+    align-content:              center;
+    background-color:           #85c6c6;
+    padding-left:               20px;
+    padding-top:                12px;
+    padding-bottom:             12px;
+    padding-right:              20px;
+    margin:                     0px;
+    width:                      auto;
+    height:                     auto;
+    float:                      top;
+}
+
+div.content_global {
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      black;
+    font-weight:                normal;
+    font-size:                  15px;
+    background-color:           beige;
+    align-content:              center;
+    padding-left:               10px;
+    padding-top:                15px;
+    padding-bottom:             15px;
+    padding-right:              10px;
+    margin:                     30px 5%;
+    width:                      auto;
+    height:                     auto;
+    border:                     2px solid #edbf76;
+    border-radius:              15px;
+}
+
+div.container_global {
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      black;
+    font-weight:                normal;
+    font-size:                  15px;
+    background-color:           beige;
+    align-content:              center;
+    padding-left:               10px;
+    padding-top:                10px;
+    padding-bottom:             10px;
+    padding-right:              10px;
+    margin:                     0px;
+}
+
+.logoutbox_global, .logoutbox_global:link, .logoutbox_global:visited {
+    cursor:                     pointer;
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      white;
+    background-color:           tomato;
+    font-weight:                bold;
+    font-size:                  18px;
+    text-align:                 center;
+    padding:                    5px 20px;
+    margin:                     20px 35%;
+    width:                      auto;
+    height:                     50px;
+    border:                     2px solid tomato;
+    border-radius:              10px;
+    text-decoration:            none;
+}
+
+.logoutbox_global:hover, .logoutbox_global:hover:visited {
+    cursor:                     pointer;
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      tomato;
+    background-color:           white;
+    font-weight:                bold;
+    font-size:                  18px;
+    text-align:                 center;
+    padding:                    5px 20px;
+    margin:                     20px 35%;
+    width:                      auto;
+    height:                     50px;
+    border:                     2px solid tomato;
+    border-radius:              10px;
+    text-decoration:            none;
+}
+
+a.inline-link:link, a.inline-link:visited {
+    display:                    inline-flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      white;
+    background-color:           black;
+    font-weight:                bold;
+    font-size:                  15px;
+    text-align:                 center;
+    padding:                    3px 5px;
+    width:                      auto;
+    height:                     auto;
+    border-radius:              5px;
+    text-decoration:            none;
+    margin:                     5px;
+}
+
+a.inline-link:hover, a.inline-link:hover:visited {
+    display:                    inline-flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      white;
+    background-color:           #505050;
+    font-weight:                bold;
+    font-size:                  15px;
+    text-align:                 center;
+    padding:                    3px 5px;
+    width:                      auto;
+    height:                     auto;
+    border-radius:              5px;
+    text-decoration:            none;
+    margin:                     5px;
+}
+
+a.fancy-link:link, a.fancy-link:visited {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      white;
+    background-color:           black;
+    font-weight:                bold;
+    font-size:                  15px;
+    text-align:                 center;
+    padding:                    5px 5px;
+    width:                      auto;
+    height:                     auto;
+    border:                     2px solid black;
+    border-radius:              5px;
+    text-decoration:            none;
+    margin:                     10px;
+}
+
+a.fancy-link:hover, a.fancy-link:hover:visited {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      black;
+    background-color:           white;
+    font-weight:                bold;
+    font-size:                  15px;
+    text-align:                 center;
+    padding:                    5px 5px;
+    width:                      auto;
+    height:                     auto;
+    border:                     2px solid black;
+    border-radius:              5px;
+    text-decoration:            none;
+    margin:                     10px;
+}
+
+.activewindow, .activewindow:visited {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  20px;
+    font-weight:                bold;
+    color:                      #0f0f0f;
+    background-color:           white;
+    border:                     2px solid #0f0f0f;
+    border-radius:              10px;
+    width:                      300px;
+    height:                     auto;
+    padding:                    10px 10px;
+    line-height:                1.5;
+    text-decoration:            none;
+}
+
+.activewindow:hover, .activewindow:visited:hover {
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  20px;
+    font-weight:                bold;
+    color:                      white;
+    background-color:           #0f0f0f;
+    border:                     2px solid #0f0f0f;
+    border-radius:              10px;
+    width:                      300px;
+    height:                     auto;
+    padding:                    10px 10px;
+    line-height:                1.5;
+    text-decoration:            none;
+}
+
+.rectbutton, .rectbutton:visited {
+    cursor:                     pointer;
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      white;
+    background-color:           tomato;
+    font-weight:                bold;
+    font-size:                  15px;
+    text-align:                 center;
+    padding:                    5px 5px;
+    margin:                     10px 10%;
+    width:                      80%;
+    height:                     auto;
+    border:                     2px solid tomato;
+    border-radius:              5px;
+    text-decoration:            none;
+}
+
+.rectbutton:hover, .rectbutton:hover:visited {
+    cursor:                     pointer;
+    display:                    flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      tomato;
+    background-color:           white;
+    font-weight:                bold;
+    font-size:                  15px;
+    text-align:                 center;
+    padding:                    5px 5px;
+    width:                      80%;
+    height:                     auto;
+    border:                     2px solid tomato;
+    border-radius:              5px;
+    text-decoration:            none;
+    margin:                     10px 10%;
+}
+
+.rectbutton-inline, .rectbutton-inline:visited {
+    cursor:                     pointer;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      white;
+    background-color:           tomato;
+    font-weight:                bold;
+    font-size:                  15px;
+    text-align:                 center;
+    padding:                    5px 5px;
+    margin:                     10px;
+    width:                      100px;
+    height:                     auto;
+    border:                     2px solid tomato;
+    border-radius:              5px;
+    text-decoration:            none;
+}
+
+.rectbutton-inline:hover, .rectbutton-inline:hover:visited {
+    cursor:                     pointer;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      tomato;
+    background-color:           white;
+    font-weight:                bold;
+    font-size:                  15px;
+    text-align:                 center;
+    padding:                    5px 5px;
+    width:                      100px;
+    height:                     auto;
+    border:                     2px solid tomato;
+    border-radius:              5px;
+    text-decoration:            none;
+    margin:                     10px;
+}

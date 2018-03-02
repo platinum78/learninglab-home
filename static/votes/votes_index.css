@@ -1,0 +1,92 @@
+/* DEFAULT ELEMENTS STYLES */
+div.student_menu_top {
+    background-color:           #c4ede9;
+    padding:                    10px;
+    display:                    table;
+    width:                      95%;
+    height:                     300px;
+}
+
+div.student_menus {
+    font-family:                Arial, Helvetica, sans-serif;
+    /*color:                    black;*/
+    font-weight:                normal;
+    font-size:                  20px;
+    background-color:           beige;
+    padding-left:               20px;
+    padding-top:                15px;
+    padding-bottom:             15px;
+    padding-right:              15px;
+    height:                     130px;
+}
+
+div.votebox {
+    font-family:                Arial, Helvetica, sans-serif;
+    /*color:                    black;*/
+    font-weight:                normal;
+    font-size:                  20px;
+    background-color:           beige;
+    padding-left:               20px;
+    padding-top:                15px;
+    padding-bottom:             15px;
+    padding-right:              15px;
+    height:                     auto;
+    align:                      center;
+    clear:                      both;
+}
+
+button.button_link, button.button_link:visited {
+    font-family:                Arial, Helvetica, sans-serif;
+    font-weight:                bold;
+    font-size:                  20px;
+    color:                      white;
+    background-color:           #0f0f0f;
+    width:                      70%;
+    height:                     60px;
+    align:                      center;
+    border:                     2px solid #0f0f0f;
+    border-radius:              10px;
+    text-align:                 center;
+    vertical-align:             middle;
+}
+
+button.button_link:hover, button.button_link:hover:visited {
+    font-family:                Arial, Helvetica, sans-serif;
+    cursor:                     pointer;
+    font-weight:                bold;
+    font-size:                  20px;
+    color:                      #0f0f0f;
+    background-color:           white;
+    width:                      70%;
+    height:                     60px;
+    align:                      center;
+    border:                     2px solid #0f0f0f;
+    border-radius:              10px;
+    text-align:                 center;
+    vertical-align:             middle;
+}
+
+div.full_box {
+    width:                      100%;
+    height:                     100%;
+    vertical-align:             center;
+}
+
+a.button:link {
+    text-decoration:            none;
+    color:                      blue;
+    vertical-align:             middle;
+}
+
+a.button:hover {
+    text-decoration:            none;
+    color:                      white;
+    vertical-align:             middle;
+}
+
+div.activeproblemwindow {
+    width:                      40%;
+    height:                     100px;
+    background-color:           tomato;
+
+}

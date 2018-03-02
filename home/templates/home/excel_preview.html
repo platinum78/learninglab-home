@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>Excel Preview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    {% load home_tags %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Select Date and Class</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a href="">Select Date and Class</a>
+    </div>
+
+    <!-- main contents -->
+    <div class="content_global" style="display: block;">
+        <center>Welcome, {{instructor_name}} !<br>
+        You're logged in as a faculty member.</center> <br> <br>
+        You uploaded {{ filename }}, and the file looks like this. <br>
+        The numbers in the left are added automatically by our system, not included in your file. <br><br>
+
+        <table style="width: 100%; font-size: 13px; text-align: center;">
+            <tr>
+                <th></th>
+                <th>Affiliation</th>
+                <th>Major</th>
+                <th>Grade</th>
+                <th>ID Number</th>
+                <th>English Name</th>
+                <th>Korean Name</th>
+                <th>E-Mail</th>
+            </tr>
+            {% for student in students %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{affiliation|index:student}}</td>
+                    <td>{{major|index:student}}</td>
+                    <td>{{grade|index:student}}</td>
+                    <td>{{id_num|index:student}}</td>
+                    <td>{{eng_name|index:student}}</td>
+                    <td>{{kor_name|index:student}}</td>
+                    <td>{{email|index:student}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <center><h3 class="report">Do you like it? </h3></center>
+        <div style="display: flex; justify-content: center;">
+            <a class="rectbutton-inline" href="/faculty/sysstat/classinit/parse/filename={{filename}}/">Accept</a>
+            <a class="rectbutton-inline" href="{% url 'home:roster_upload' %}">Revise</a>
+        </div>
+    </div>
+
+</body>
+</html>

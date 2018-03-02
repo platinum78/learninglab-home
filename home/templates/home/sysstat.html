@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>LearningLab Homepage - Faculty Members</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/sysstat.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- titlebar -->
+    <div class="titlebar_global"><center>LearningLab - Statistics</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a href="{% url 'home:sysstat' %}">Stats</a>
+    </div>
+
+    <!-- main content -->
+    <div class="content_global">
+        <center>You're logged in as a faculty member.</center> <br>
+        <div class="reportbox">
+            <h3 class="report">System Statistics</h3>
+
+            <div class="hline-heavy"></div>
+                <!-- student cnt -->
+
+            <div style="clear: both;"> </div>
+
+            <h3 class="report">Initialize Course Data</h3>
+            <center>Upload an Microsoft(R) Excel(R) file to register students to your course. <br>
+            In this initial version, this operation will delete all existing information. <br> </center>
+            <div style="height: 20px;"></div>
+            <div style="display: block; justify-content: center; margin: 0px 30%; width: auto;">
+                <a class="fancy-link" href="{% url 'home:roster_upload' %}">Select an Excel File...</a>
+            </div>
+            <div class="hline-heavy"></div>
+        </div>
+    </div>
+</body>
+</html>

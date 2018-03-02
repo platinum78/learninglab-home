@@ -1,0 +1,49 @@
+span.subtitle {
+    font-size:                      16px;
+    font-weight:                    bold;
+    color:                          black;
+}
+
+div.reportbox {
+    font-size:                      15px;
+    font-weight:                    normal;
+    font-family:                    Arial, Helvetica, sans-serif;
+    margin:                         0% 10%;
+    width:                          auto;
+    height:                         auto;
+    color:                          black;
+    background-color:               ivory;
+    border:                         3px solid darkgrey;
+    padding:                        15px 20px;
+}
+
+div.hline-heavy {
+    margin:                         20px 0px;
+    padding:                        0px;
+    height:                         3px;
+    width:                          auto;
+    background-color:               darkgrey;
+}
+
+div.hline-light {
+    margin:                         10px 0px;
+    padding:                        0px;
+    height:                         1.5px;
+    width:                          auto;
+    background-color:               darkgrey;
+}
+
+h3.report {
+    text-align:                     center;
+    line-height:                    2;
+}
+
+div.button-report {
+    background-color:               orange;
+    color:                          black;
+    margin:                         20px 25%;
+    width:                          auto;
+    height:                         30px;
+    text-align:                     center;
+    vertical-align:                 center;
+}

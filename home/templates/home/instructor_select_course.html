@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Select Problem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Select Course...</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a href="{% url 'home:faculty' %}">Select Course</a> >
+        <a href="">Select the Problem</a>
+    </div>
+
+    <!-- main contents -->
+    <div class="content_global" style="display: block;">
+        <center>Welcome, {{instructor_name}} !<br>
+        You're logged in as a faculty member.</center> <br>
+        <div style="display: flex; justify-content: center;">
+            <form style="margin: 0px 5%; width: 90%;" action="{% url 'home:course_selection_handler' %}" method="post">
+                {% csrf_token %}
+                <select class="dropbox" name="course_token" style="width: 100%; font-size: 16px;">
+                    {% for token, course_name in courses_dict %}
+                        <option value="{{token}}">{{course_name}}</option>
+                    {% endfor %}
+                </select>
+                <br> <div style="height: 20px;"></div>
+                <center><button class="logoutbox_global" type="submit">Select</button></center>
+            </form>
+        </div>
+    </div>
+
+    <!-- logout box -->
+    <!-- <a class="logoutbox_global" href="{% url 'home:logout' %}">Select!</a> -->
+
+</body>
+</html>

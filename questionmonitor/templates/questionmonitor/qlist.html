@@ -1,0 +1,53 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Switch</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'questionmonitor/questionmonitor.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <div class="titlebar_global"><center>Question Switch</center></div>
+    <div class="navigationbar_global">
+        <a href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a href="{% url 'questionmonitor:index' %}">Question Management</a>
+         > Lecture {{lecture_num}}
+    </div>
+    <div class="content_global">
+        You can activate or deactivate problems here.
+
+        <!-- spacer -->
+        <div style="height: 30px;"> </div>
+
+        <!-- currently active probelm window -->
+        <div align="center">
+            <a class="activewindow" href="{{active_question_link}}">
+                Currently Active<br>[{{ active_question_text }}]
+                {% if question_state == 1 %}
+                    <br>(First Vote)
+                {% elif question_state == 2 %}
+                    <br>(Second Vote)
+                {% endif %}
+            </a>
+        </div>
+
+        <!-- spacer -->
+        <div style="height: 30px;"> </div>
+
+        <!-- kill switch -->
+        <div style="display: flex; justify-content: center;">
+            <a class="button-deactivate" href="{% url 'questionmonitor:killswitch' %}">Deactivate</a>
+        </div>
+
+        <!-- spacer -->
+        <div style="height: 30px;"> </div>
+
+        <!-- lecture list -->
+        <div style="height: auto; width: 100%">
+            {% for question in this_lecture_questions %}
+                <a class="listbox" href="/faculty/questionmonitor/{{ lecture_num }}/{{question.question_num}}/state/">
+                    Question {{question.question_num}}
+                </a>
+            {% endfor %}
+        </div>
+    </div>

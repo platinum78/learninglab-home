@@ -1,0 +1,67 @@
+<html>
+<head>
+    <title>Select Date and Class</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Select Date and Class</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a href="">Select Date and Class</a>
+    </div>
+
+    <!-- main contents -->
+    <div class="content_global" style="display: block;">
+        <center>Welcome, {{instructor_name}} !<br>
+        You're logged in as a faculty member.</center> <br>
+        <form enctype="multipart/form-data" action="{% url 'home:excelsend' %}" method="post">
+            {% csrf_token %}
+            <div style="margin: 0px 10%; width: 80%;">
+                <h3 class="report"><center>Current Session: {{course_title}}</center></h3>
+            </div> <br>
+            <h2 align="center" style="color: red;">BEWARE: Your Excel file SHOULD be formatted as below, <br>
+                and there should be NO MERGED CELL.
+            </h2><br>
+
+            <table style="width: 100%; font-size: 15px; text-align: center;">
+                <tr>
+                    <th>Affiliation</th>
+                    <th>Major</th>
+                    <th>Grade</th>
+                    <th>ID Number</th>
+                    <th>English Name</th>
+                    <th>Korean Name</th>
+                    <th>E-Mail</th>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                </tr>
+
+            </table>
+            <br> <div style="height: 20px;"></div>
+                <!-- file upload -->
+                <div style="display: flex; justify-content: center;">
+                    <input class="pickfile" type="file" name="excel" accept="xls|xlsx">
+                </div>
+            <div>
+            <button class="rectbutton" type="submit">Select!</button> </div>
+        </form>
+    </div>
+
+    <!-- logout box -->
+    <!-- <a class="logoutbox_global" href="{% url 'home:logout' %}">Select!</a> -->
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>LearningLab Homepage - Faculty Members</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Instructor Home</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a class="inline-link" href="{% url 'home:faculty' %}">Faculty Home</a>
+    </div>
+
+    <!-- main contents -->
+    <div class="content_global">
+        <center>Welcome, {{instructor_name}} !<br>
+        You're logged in as a faculty member. <br>
+        Currently active course is {{course_title}}.</center> <br>
+
+        <a class="menus" href="">Start / Stop Recording
+        <a class="menus" href="{% url 'questionmonitor:index' %}">Question Switch / Statistics</a>
+        <a class="menus" href="https://www.piazza.com/" target="_blank">Piazza</a>
+        <a class="menus" href="https://docs.google.com/forms/d/e/1FAIpQLSfQZ_BAnhg2zAuU9wGN-JqMiHWibh5LCOrs7cNBWabqvlrQyw/viewform" target="_blank">Pre-Class</a>
+        <a class="menus" href="{% url 'home:selectdateclass' %}">Class Reports</a>
+        <a class="menus" href="{% url 'home:registration' %}">Class Reports
+        <a class="menus" href="{% url 'home:sysstat' %}">System Management / Statistics</a>
+        <a class="menus" href="{% url 'home:selectcourse' %}">Switch Course</a>
+    </div>
+
+    <!-- logout box -->
+    <a class="logoutbox_global" href="{% url 'home:logout' %}">Logout</a>
+
+</body>
+</html>
