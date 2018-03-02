@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Calibrate Students Roster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Calibrate Students Roster</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a class="inline-link" href="{% url 'home:faculty' %}">Faculty Home</a>
+    </div>
+
+    <!-- main contents -->
+    <div class="content_global">
+        <center>Welcome, {{instructor_name}} !<br>
+        You're logged in as a faculty member. <br>
+        Currently active course is {{course_title}}.</center> <br>
+
+        <center><h3 class="report">WARNING</h3>
+        You will delete all student information by clicking [Agree]. <br>
+        If you're aware of what you're going to do, enter your password and press [Agree].</center>
+
+        <div class="loginform">
+            <form action="{% url 'home:student_calibration_handler' %}" method="post">
+                {% csrf_token %}
+                <input class="fancy-text" type="password" name="password">
+                <button type="submit" class="rectbutton">Agree</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- logout box -->
+    <a class="logoutbox_global" href="{% url 'home:logout' %}">Logout</a>
+
+</body>
+</html>

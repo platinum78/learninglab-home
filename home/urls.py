@@ -37,6 +37,8 @@ urlpatterns = [
     path('faculty/sysstat/classinit/<str:filename>/preview/', views.excelpreview, name="excelpreview"),
     path('faculty/sysstat/classinit/parse/filename=<str:file_name>/', views.register_students_handler),
     path('faculty/sysstat/classinit/result/', views.student_registration_result, name="register_result"),
+    path('faculty/sysstat/classinit/calibrate/', views.student_calibration, name="student_calibration"),
+    path('faculty/sysstat/classinit/calibrated/', views.calibration_result, name="calibration_result"),
 
     # visitor homepage
     ################################################################
@@ -48,4 +50,5 @@ urlpatterns = [
     path('classreport/selectdateclass/', views.select_date_class, name="selectdateclass"),
     path('classreport/selectdateclass/select/', views.dateclass_redirect, name="parsedateclass"),
     path('classreport/date=<int:date>/class=<int:class_num>/', views.classreport),
+    path('faculty/sysstat/classinit/calibrate/parse/', views.student_calibration_handler, name="student_calibration_handler"),
 ]

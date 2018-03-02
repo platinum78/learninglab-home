@@ -149,7 +149,7 @@ def logout_(request):
     logout_user = request.user
     try:
         Faculty.objects.get(user=logout_user)
-        close_all_questions()
+        Question.close_all()
         close_all_courses()
         is_faculty = True
     except Faculty.DoesNotExist:
@@ -251,7 +251,7 @@ def roster_upload(request):
         course_token = course.course_token
         courses_dict[course_token] = course_title
         """
-    course = find_active_course()
+    course = Course.find_active_course()
     course_title = str(course.year)+'-'+str(course.semester)+' '+course.course_name + " - Class " + str(course.class_num)
     roster_upload_html = loader.get_template("home/roster_upload.html")
     context = {
@@ -319,7 +319,7 @@ def select_course(request):
     # deactivate the system before course selection
     ################################################################
     try:
-        find_active_course(deactivate=True)
+        Course.find_active_course(deactivate=True)
     except Course.DoesNotExist:
         pass
 
@@ -383,3 +383,25 @@ def excel_read(file_name, return_base_dir=False):
         return roster, student_cnt, BASE_DIR
     else:
         return roster, student_cnt
+
+def student_calibration(request):
+    student_calibration_html = loader.get_template("home/student_calibration.html")
+    context = {}
+    return HttpResponse(student_calibration_html.render(context, request))
+
+def student_calibration_handler(request):
+    course = Course.find_active_course()
+    username = request.user.username
+    password = request.POST["password"]
+    if authenticate(username=username, password=password) is not None:
+        course.student_set.all().delete()
+        return redirect("home:calibration_result")
+    else:
+        return redirect("home:student_calibration")
+
+
+
+def calibration_result(request):
+    calibration_result_html = loader.get_template("home/calibration_result.html")
+    context = {}
+    return HttpResponse(calibration_result_html.render(context, request))

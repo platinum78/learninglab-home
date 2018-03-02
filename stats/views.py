@@ -9,7 +9,7 @@ import os
 
 # Create your views here.
 def index(request, lecture, question):
-    c = find_active_course()
+    c = Course.find_active_course()
     q = Question.objects.get(lecture_num=lecture, question_num=question)
     current_question_responses = Response.objects.filter(responder__enrolled_course=c, question=q)
     active_question_text = q.question_text

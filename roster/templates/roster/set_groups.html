@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Group Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Group Settings</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a class="inline-link" href="">Faculty Home</a>
+    </div>
+
+    <!-- main contents -->
+    <div class="content_global">
+        <center>Welcome, {{instructor_name}} !<br>
+        You're logged in as a faculty member. <br>
+        Currently active course is {{course_title}}.</center> <br>
+
+        You can either set groups manually on this site, or upload an Excel<sup>(R)</sup> file to set groups. <br>
+        If you want to use an Excel<sup>(R)</sup> file, number of students stored on our service and written on the Excel file should be identical. <br>
+
+    </div>
+
+    <!-- logout box -->
+    <a class="logoutbox_global" href="{% url 'home:logout' %}">Logout</a>
+
+</body>
+</html>

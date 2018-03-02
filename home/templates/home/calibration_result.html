@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Calibration Finishd</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/sysstat.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- titlebar -->
+    <div class="titlebar_global"><center>Calibration Finished</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a href="{% url 'home:sysstat' %}">Stats</a>
+    </div>
+
+    <!-- main content -->
+    <div class="content_global">
+        <center>You're logged in as a faculty member.</center> <br>
+        <div class="reportbox">
+            <center><h3 class="report">Calibration Finished</h3><br>
+                Calibrated students roster. <br></center>
+        </div>
+    </div>
+</body>
+</html>

@@ -19,7 +19,7 @@ def index(request):
             is_in_current_class = True
 
             try:
-                active_question = find_active_question()
+                active_question = Question.find_active()
                 active_question_text = active_question.question_text
                 active_questionnaires_cnt = active_question.questionnaires_cnt
                 active_question_choice_range = list(range(1,active_question.questionnaires_cnt+1))
@@ -66,7 +66,7 @@ def index(request):
 # voting actions
 ################################################
 def response(request):
-    q = find_active_question()
+    q = Question.find_active()
     selected_choice = request.POST['choice']
 
     if request.user.is_authenticated != True:

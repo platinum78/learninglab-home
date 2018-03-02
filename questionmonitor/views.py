@@ -16,7 +16,7 @@ def index(request):
         return HttpResponseForbidden("FORBIDDEN: You're not authorized to view this page.")
 
     try:
-        active_question = find_active_question()
+        active_question = Question.find_active()
         active_question_text = active_question.question_text
         question_state = active_question.question_state
         active_question_link = "/questionmonitor/%d/%d/state/" % (active_question.lecture_num, active_question.question_num)
@@ -39,7 +39,7 @@ def index(request):
 
 def killswitch(request):
     try:
-        find_active_question(deactivate=True)
+        Question.find_active(deactivate=True)
     except Question.DoesNotExist:
         return redirect("questionmonitor:index")
 
@@ -48,7 +48,7 @@ def qlist(request, lecture_num):
     this_lecture_questions = this_lecture_questions.order_by("question_num")
 
     try:
-        active_question = find_active_question()
+        active_question = Question.find_active()
         active_question_text = active_question.question_text
         question_state = active_question.question_state
         active_question_link = "/questionmonitor/%d/%d/state/" % (active_question.lecture_num, active_question.question_num)
@@ -81,7 +81,7 @@ def show_state(request, lecture_num, question_num):
 
 def question_to_first_vote(request, lecture_num, question_num):
     try:
-        q = find_active_question(deactivate=True)
+        q = Question.find_active(deactivate=True)
     except Question.DoesNotExist:
         q = Question.objects.get(lecture_num=lecture_num, question_num=question_num)
         q.question_state = 1
@@ -90,7 +90,7 @@ def question_to_first_vote(request, lecture_num, question_num):
 
 def question_to_second_vote(request, lecture_num, question_num):
     try:
-        q = find_active_question(deactivate=True)
+        q = Question.find_active(deactivate=True)
     except Question.DoesNotExist:
         q = Question.objects.get(lecture_num=lecture_num, question_num=question_num)
         q.question_state = 2
@@ -99,7 +99,7 @@ def question_to_second_vote(request, lecture_num, question_num):
 
 def question_deactivate(request, lecture_num, question_num):
     try:
-        q = find_active_question(deactivate=True)
+        q = Question.find_active(deactivate=True)
     except Question.DoesNotExist:
         q = Question.objects.get(lecture_num=lecture_num, question_num=question_num)
         q.question_state = 0

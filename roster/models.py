@@ -16,6 +16,7 @@ class Student(models.Model):
     grade = models.IntegerField(default=0)
     prev_gpa = models.FloatField(default=0)
     enrolled_course = models.ManyToManyField(Course)
+    group_num = models.IntegerField(default=0)
     is_visitor = models.BooleanField(default=False)
 
 class Faculty(models.Model):
@@ -26,12 +27,6 @@ class Faculty(models.Model):
     name_text_english = models.CharField(max_length=30)
     class_num= models.IntegerField(default=0)
     position_text = models.IntegerField(default=0)
-
-class Visitor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,
-                                null=True, default=None)
-    id_text = models.CharField(max_length=10, primary_key=True)
-    temp_password = models.CharField(max_length=15, default = "")
 
 def student_batch_addition(sheet_path, year, semester, course_name, class_num):
     data = pandas.read_excel(sheet_path, sheet_name='sheet').as_matrix()
