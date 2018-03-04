@@ -33,7 +33,7 @@ class Course(models.Model):
                 active_course.save()
                 raise Course.DoesNotExist
 
-    def close_all_courses():
+    def close_all():
         courses = Course.objects.all()
         for course in courses:
             course.is_active = False

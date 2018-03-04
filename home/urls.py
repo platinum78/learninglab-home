@@ -12,6 +12,7 @@ urlpatterns = [
     path('login/', views.login_, name='login'),
     path('logout/', views.logout_, name='logout'),
     path('user404/', views.user404, name='user404'),
+    path('user404/tempregister/', views.visitor_handler, name="visitorhandler"),
     path('invalid_request/', views.invalid_request, name="invalid"),
 
     # student homepage / account info

@@ -29,7 +29,7 @@
         </center>
 
         <div class="loginform">
-            <form action="{% url 'home:login' %}" method="post" align="center">
+            <form action="{% url 'home:visitorhandler' %}" method="post" align="center">
                 {% csrf_token %}
                 Your student number <br>
                 <input class="fancy-text" type="text" name="id" value=""> <br>

@@ -82,12 +82,12 @@ def faculty(request):
 
 def visitor(request):
     try:
-        Visitor.objects.get(user=request.user)
+        Student.objects.get(user=request.user)
         visitor_html = loader.get_template('home/visitor.html')
         user = request.user
         context = {}
         return HttpResponse(visitor_html.render(context, request))
-    except Visitor.DoesNotExist:
+    except Student.DoesNotExist:
         return redirect("home:invalid")
 
 def invalid_request(request):
@@ -150,7 +150,7 @@ def logout_(request):
     try:
         Faculty.objects.get(user=logout_user)
         Question.close_all()
-        close_all_courses()
+        Course.close_all()
         is_faculty = True
     except Faculty.DoesNotExist:
         is_faculty = False
@@ -176,18 +176,16 @@ def visitor_handler(request):
     user_id = request.POST["id"]
 
     # get temporary user data and add to visitor list
-    user = User.objects.create_user(username=str(data[idx,3]),
-                                    password=str(data[idx,3]),
-                                    email=data[idx,6],
-                                    first_name=data[idx,4])
-    visitor = Visitor.objects.create(user=user,
-                                    id_text = "",
-                                    temp_password=random_pw)
+    user = User.objects.create_user(username=str(user_id),
+                                    password=str(user_id))
+    visitor = Student.objects.create(user=user,
+                                    id_text=user_id)
 
     user_login = authenticate(usrename=user_id, password=random_pw)
 
     if user_login is not None:
         login(request, user_login)
+    return redirect("home:visitor")
 
 def anonymoususer_logout(request):
     user = request.user
@@ -342,7 +340,7 @@ def select_course(request):
     return HttpResponse(select_course_html.render(context, request))
 
 def course_selection_handler(request):
-    close_all_courses()
+    Course.close_all()
     course_token = request.POST["course_token"]
     course = Course.objects.get(course_token=course_token)
     course.is_active = True
