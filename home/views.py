@@ -162,6 +162,13 @@ def logout_(request):
     context = {
         "is_faculty": is_faculty,
     }
+
+    # delete user info if the user was a visitor
+    ################################################################
+    logout_student = Student.objects.get(user=logout_user)
+    if logout_student.is_visitor == True:
+        User.objects.get(username=logout_student.id_text).delete()
+
     return HttpResponse(logout_html.render(context, request))
 
 def user404(request):
@@ -172,16 +179,15 @@ def user404(request):
 def visitor_handler(request):
     # create 15-digit arbitrary password
     charbank = string.ascii_uppercase + string.ascii_lowercase + string.digits
-    random_pw = "".join(random.choice(charbank) for _ in range(15))
     user_id = request.POST["id"]
 
     # get temporary user data and add to visitor list
     user = User.objects.create_user(username=str(user_id),
                                     password=str(user_id))
     visitor = Student.objects.create(user=user,
-                                    id_text=user_id)
+                                    id_text=user_id, is_visitor=True)
 
-    user_login = authenticate(usrename=user_id, password=random_pw)
+    user_login = authenticate(username=user_id, password=user_id)
 
     if user_login is not None:
         login(request, user_login)
@@ -317,7 +323,7 @@ def select_course(request):
     # deactivate the system before course selection
     ################################################################
     try:
-        Course.find_active_course(deactivate=True)
+        Course.close_all()
     except Course.DoesNotExist:
         pass
 
