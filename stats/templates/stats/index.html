@@ -29,9 +29,26 @@
             </span>
         </div>
 
-        {% for num in first_vote %}
-            <li>Choice {{forloop.counter}}: {{num}}</li>
-        {% endfor %}
+        <table style="width: 90%; margin: 20px 5%; text-align: center; border: 1px solid black;">
+            <tr style="height: 20px;">
+                <th style="border: 1px solid black; height: 30px;">Iteration</th>
+                {% for num in first_vote %}
+                    <th style="border: 1px solid black; height: 30px;">Choice {{forloop.counter}}</th>
+                {% endfor %}
+            </tr>
+            <tr style="height: 40px;">
+                <td style="border: 1px solid black; width: 150px">First Vote</td>
+                {% for num in first_vote %}
+                    <td style="border: 1px solid black;">{{ num }}</td>
+                {% endfor %}
+            </tr>
+            <tr style="height: 40px;">
+                <td style="border: 1px solid black; width: 150px">Second Vote</td>
+                {% for num in second_vote %}
+                    <td style="border: 1px solid black;">{{ num }}</td>
+                {% endfor %}
+            </tr>
+        </table>
         <img class="barplot" src={{fig_path}} alt="plot unavailable"> <br>
     </div>
 

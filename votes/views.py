@@ -33,12 +33,22 @@ def index(request):
                 question_state = 0
 
         except Student.DoesNotExist:
-            is_in_current_class = False
-            active_question_text = 'None'
-            active_questionnaires_cnt = 0
-            active_question_choice_range = []
-            pane_width = 100
-            question_state = 0
+            try:
+                Student.objects.get(user=current_user, is_visitor=True)
+                is_in_current_class = True
+                active_question = Question.find_active()
+                active_question_text = active_question.question_text
+                active_questionnaires_cnt = active_question.questionnaires_cnt
+                active_question_choice_range = list(range(1,active_question.questionnaires_cnt+1))
+                pane_width = 100 / active_questionnaires_cnt
+                question_state = active_question.question_state
+            except Student.DoesNotExist:
+                is_in_current_class = False
+                active_question_text = 'None'
+                active_questionnaires_cnt = 0
+                active_question_choice_range = []
+                pane_width = 100
+                question_state = 0
 
     except Course.DoesNotExist:
         is_in_current_class = False

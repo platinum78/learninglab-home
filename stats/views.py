@@ -15,6 +15,8 @@ import cgitb
 cgitb.enable()
 os.environ['HOME'] = '/tmp'
 
+from collections import OrderedDict
+
 # Create your views here.
 def index(request, question):
     c = Course.find_active_course()
@@ -22,12 +24,14 @@ def index(request, question):
     current_question_responses = Response.objects.filter(responder__enrolled_course=c, question=q)
     active_question_text = q.question_text
     choice_cnt = q.questionnaires_cnt
+    choice_list = list(range(choice_cnt))
     first_vote = []
     second_vote = []
     for choice in range(choice_cnt):
         first_vote.append(len(current_question_responses.filter(answer_1=choice+1, responder__enrolled_course=c)))
         second_vote.append(len(current_question_responses.filter(answer_2=choice+1, responder__enrolled_course=c)))
 
+    vote_dict = OrderedDict(zip(first_vote, second_vote))
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     fig = plt.figure(1, figsize=[8,6], tight_layout=True)
@@ -42,6 +46,7 @@ def index(request, question):
 
     context = {
         'first_vote': first_vote,
+        'second_vote': second_vote,
         'fig_path': '/static/plotImg/barplot.svg',
         'active_question_text': active_question_text,
     }
