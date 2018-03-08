@@ -1,16 +1,24 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
+import matplotlib
+matplotlib.use('Agg')
 from matplotlib import pyplot as plt
+
 from django.template import loader, Context
 from votes.models import *
 from roster.models import *
 import numpy as np
-import os
+import os,sys
+import cgi
+import cgitb
+cgitb.enable()
+os.environ['HOME'] = '/tmp'
 
 # Create your views here.
-def index(request, lecture, question):
+def index(request, question):
     c = Course.find_active_course()
-    q = Question.objects.get(lecture_num=lecture, question_num=question)
+    q = Question.objects.get(question_num=question)
     current_question_responses = Response.objects.filter(responder__enrolled_course=c, question=q)
     active_question_text = q.question_text
     choice_cnt = q.questionnaires_cnt

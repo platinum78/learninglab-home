@@ -129,6 +129,7 @@ a.button-deactivate:hover, a.button-deactivate:hover:visited {
     height:                     90px;
     text-decoration:            none;
 }
+
 a.button-stats:link, a.button-stats:visited {
     display:                    flex;
     justify-content:            center;
@@ -146,7 +147,7 @@ a.button-stats:link, a.button-stats:visited {
 }
 
 a.button-stats:hover, a.button-stats:hover:visited {
-    display:                    flex;
+    display:                    block;
     justify-content:            center;
     align-items:                center;
     font-family:                Arial, Helvetica, sans-serif;
@@ -160,3 +161,76 @@ a.button-stats:hover, a.button-stats:hover:visited {
     height:                     90px;
     text-decoration:            none;
 }
+
+a.questionbutton-new, a.questionbutton-new:visited {
+    display:                    inline-flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  15px;
+    font-weight:                bold;
+    color:                      white;
+    background-color:           skyblue;
+    border:                     2px solid skyblue;
+    border-radius:              10px;
+    width:                      calc(22.5% - 10px);
+    height:                     40px;
+    margin:                     5px 1.25%;
+    text-decoration:            none;
+
+}
+
+a.questionbutton-new:hover, a.questionbutton-new:visited:hover:visited {
+    display:                    inline-flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  15px;
+    font-weight:                bold;
+    color:                      skyblue;
+    background-color:           white;
+    border:                     2px solid skyblue;
+    border-radius:              10px;
+    width:                      calc(22.5% - 10px);
+    height:                     40px;
+    margin:                     5px 1.25%;
+    text-decoration:            none;
+}
+
+a.questionbutton-visited, a.questionbutton-visited:visited {
+    display:                    inline-flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  15px;
+    font-weight:                bold;
+    color:                      white;
+    background-color:           blue;
+    border:                     2px solid blue;
+    border-radius:              10px;
+    width:                      calc(22.5% - 10px);
+    height:                     40px;
+    margin:                     5px 1.25%;
+    text-decoration:            none;
+}
+
+a.questionbutton-visited:hover, a.questionbutton-visited:visited:hover {
+    display:                    inline-flex;
+    justify-content:            center;
+    align-items:                center;
+    font-family:                Arial, Helvetica, sans-serif;
+    font-size:                  15px;
+    font-weight:                bold;
+    color:                      blue;
+    background-color:           white;
+    border:                     2px solid blue;
+    border-radius:              10px;
+    width:                      calc(22.5% - 10px);
+    height:                     40px;
+    margin:                     5px 1.25%;
+    text-decoration:            none;
+}
+
+/*table, td, td {
+    border: 1px solid black;
+}*/

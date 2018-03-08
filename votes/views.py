@@ -48,9 +48,6 @@ def index(request):
         pane_width = 100
         question_state = 0
 
-
-
-
     html = loader.get_template('votes/index.html')
     context = {
         'active_question_text': active_question_text,
@@ -68,6 +65,7 @@ def index(request):
 def response(request):
     q = Question.find_active()
     selected_choice = request.POST['choice']
+    course = Course.objects.get(is_active=True)
 
     if request.user.is_authenticated != True:
         # make some exception handling methods,
@@ -80,16 +78,18 @@ def response(request):
             try:
                 r = Response.objects.get(question=q, responder=current_student)
                 r.answer_1 = selected_choice
+                r.course = course
                 r.save()
             except Response.DoesNotExist:
                 Response.objects.create(question=q, answer_1=selected_choice,
-                                        responder=current_student)
+                                        responder=current_student, course=course)
         elif current_iteration == 2:
             try:
                 r = Response.objects.get(question=q, responder=current_student)
                 r.answer_2 = selected_choice
+                r.course = course
                 r.save()
             except Response.DoesNotExist:
                 Response.objects.create(question=q, answer_2 = selected_choice,
-                                        responder=current_student)
+                                        responder=current_student, course=course)
         return redirect('home:student')

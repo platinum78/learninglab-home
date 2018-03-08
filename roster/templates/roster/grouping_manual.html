@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Group Settings - Manual</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    {% load home_tags %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'roster/grouping.css' %}">
+</head>
+<body>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Group Settings - Manual</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a class="inline-link" href="">Faculty Home</a>
+    </div>
+
+    <!-- main contents -->
+    <div class="content_global">
+        <center>Welcome, {{instructor_name}} !<br>
+        You're logged in as a faculty member of {{course_title}}.</center> <br>
+
+        <table style="width: 100%; font-size: 13px; text-align: center;">
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            {% for student in students %}
+                <tr class="">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{student_numbers|index:student}}</td>
+                    <td>{{names|index:student}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- logout box -->
+    <a class="logoutbox_global" href="{% url 'home:logout' %}">Logout</a>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ from django.db import models
 from roster.models import Student
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
+from courses.models import *
 
 # Create your models here.
 class Question(models.Model):
@@ -10,7 +11,6 @@ class Question(models.Model):
     pub_date = models.DateTimeField('Date Published')
     question_state = models.IntegerField(default=0,
                                         validators=[MinValueValidator(0), MaxValueValidator(2)])
-    lecture_num = models.IntegerField(default=0, null=False)
     question_num = models.IntegerField(default=0, null=False)
 
     def find_active(deactivate=False, calibrate=False):
@@ -48,18 +48,17 @@ class Response(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer_1 = models.IntegerField(default=0)
     answer_2 = models.IntegerField(default=0)
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     responder = models.ForeignKey(Student, on_delete=models.CASCADE)
 
 # utility functions
 ################################################
 
 
-def question_initialization(lecture_cnt, question_cnt):
+def question_initialization(question_cnt):
     Question.objects.all().delete()
-    for lecture in range(lecture_cnt):
-        for question in range(question_cnt):
-            Question.objects.create(question_text="Problem %d | Lecture %d" %
-                                    (question+1, lecture+1), question_state=0,
-                                    lecture_num=lecture+1,
-                                    question_num=question+1,
-                                    pub_date=timezone.now())
+    for question in range(question_cnt):
+        Question.objects.create(question_text="Question %03d" % (question+1),
+                                question_state=0,
+                                question_num=question+1,
+                                pub_date=timezone.now())

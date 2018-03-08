@@ -11,6 +11,7 @@ class Student(models.Model):
     id_text = models.CharField(max_length=10, primary_key=True)
     name_text_korean = models.CharField(max_length=20)
     name_text_english = models.CharField(max_length=30)
+    icampus_id = models.CharField(max_length=20, default=None, null=True)
     class_num= models.IntegerField(default=0)
     major_text = models.CharField(max_length=30)
     grade = models.IntegerField(default=0)

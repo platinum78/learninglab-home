@@ -165,9 +165,12 @@ def logout_(request):
 
     # delete user info if the user was a visitor
     ################################################################
-    logout_student = Student.objects.get(user=logout_user)
-    if logout_student.is_visitor == True:
-        User.objects.get(username=logout_student.id_text).delete()
+    try:
+        logout_student = Student.objects.get(user=logout_user)
+        if logout_student.is_visitor == True:
+            User.objects.get(username=logout_student.id_text).delete()
+    except Student.DoesNotExist:
+        pass
 
     return HttpResponse(logout_html.render(context, request))
 
@@ -256,7 +259,7 @@ def roster_upload(request):
         courses_dict[course_token] = course_title
         """
     course = Course.find_active_course()
-    course_title = str(course.year)+'-'+str(course.semester)+' '+course.course_name + " - Class " + str(course.class_num)
+    course_title = course.title()
     roster_upload_html = loader.get_template("home/roster_upload.html")
     context = {
         "course_title": course_title,
@@ -278,10 +281,11 @@ def excelpreview(request, filename):
         'affiliation': np.ndarray.tolist(roster[:,0]),
         'major': np.ndarray.tolist(roster[:,1]),
         'grade': np.ndarray.tolist(roster[:,2]),
-        'id_num': np.ndarray.tolist(roster[:,3]),
-        'eng_name': np.ndarray.tolist(roster[:,4]),
-        'kor_name': np.ndarray.tolist(roster[:,5]),
-        'email': np.ndarray.tolist(roster[:,6]),
+        'icampus_id': np.ndarray.tolist(roster[:,3]),
+        'id_num': np.ndarray.tolist(roster[:,4]),
+        'eng_name': np.ndarray.tolist(roster[:,5]),
+        'kor_name': np.ndarray.tolist(roster[:,6]),
+        'email': np.ndarray.tolist(roster[:,7]),
         'student_cnt': student_cnt,
         'students': list(range(0, student_cnt)),
     }
@@ -294,16 +298,16 @@ def register_students_handler(request, file_name):
 
     for idx in range(student_cnt):
         user = User.objects.create_user(username=str(data[idx,3]),
-        password=str(data[idx,3]),
-        email=data[idx,6],
-        first_name=data[idx,4])
+                                        password=str(data[idx,4]),
+                                        email=data[idx,7],
+                                        first_name=data[idx,5])
 
-        student = Student.objects.create(user=user, id_text=data[idx,3],
-        name_text_korean=data[idx,5],
-        name_text_english=data[idx,4],
-        class_num=course.class_num,
-        major_text=data[idx,1],
-        grade=data[idx,2])
+        student = Student.objects.create(user=user, id_text=data[idx,4],
+                                        name_text_korean=data[idx,5],
+                                        name_text_english=data[idx,4],
+                                        icampus_id=data[idx,3],
+                                        major_text=data[idx,1],
+                                        grade=data[idx,2])
         student.enrolled_course.add(course)
         student.save()
     return redirect("home:register_result")
@@ -320,20 +324,13 @@ def student_registration_result(request):
     return HttpResponse(reg_result_html.render(context, request))
 
 def select_course(request):
-    # deactivate the system before course selection
-    ################################################################
-    try:
-        Course.close_all()
-    except Course.DoesNotExist:
-        pass
-
     # show the list of courses
     ################################################################
     courses = Course.objects.all().order_by("-year", "semester", "course_name", "class_num")
     course_cnt = courses.count()
     courses_dict = OrderedDict()
     for course in courses:
-        course_title = str(course.year)+'-'+str(course.semester)+' '+course.course_name + " - Class " + str(course.class_num)
+        course_title = course.title()
         course_token = course.course_token
         courses_dict[course_token] = course_title
 
@@ -346,11 +343,12 @@ def select_course(request):
     return HttpResponse(select_course_html.render(context, request))
 
 def course_selection_handler(request):
-    Course.close_all()
     course_token = request.POST["course_token"]
     course = Course.objects.get(course_token=course_token)
-    course.is_active = True
-    course.save()
+    if course != Course.objects.get(is_active=True):
+        Course.close_all()
+        course.is_active = True
+        course.save()
     return redirect("home:faculty")
 
 def student_change_password(request):

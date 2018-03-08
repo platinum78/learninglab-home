@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     '192.168.0.25',
     '115.145.156.192',
     'sdl.skku.edu',
+    'sdl.skku.edu/voting'
 ]
 
 

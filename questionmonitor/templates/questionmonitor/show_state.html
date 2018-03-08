@@ -21,19 +21,19 @@
         <div style="height: 30px;"> </div>
         <div style="display: flex; justify-content: center">
             {% if question_state == 1 %}
-                <a class="button-active" href="/faculty/questionmonitor/{{ lecture_num }}/{{ question_num }}/secondvote/">
+                <a class="button-active" href="/voting/faculty/questionmonitor/{{ question_num }}/secondvote/">
                     Active<br>(First Vote)<br>Click to deactivate</a>
             {% elif question_state == 2 %}
-                <a class="button-active" href="/faculty/questionmonitor/{{ lecture_num }}/{{ question_num }}/deactivate/">
+                <a class="button-active" href="/voting/faculty/questionmonitor/{{ question_num }}/deactivate/">
                     Active<br>(Second Vote)<br>Click to activate</br>
                 </a>
             {% elif question_state == 0 %}
-                <a class="button-inactive" href="/faculty/questionmonitor/{{ lecture_num }}/{{ question_num }}/firstvote/">
+                <a class="button-inactive" href="/voting/faculty/questionmonitor/{{ question_num }}/firstvote/">
                     Inactive<br>Click to activate</br>
                 </a>
             {% endif %}
             <div style="width: 20px;"></div>
-            <a class="button-active" href="/stats/{{lecture_num}}/{{question_num}}/" target="_blank">Show Statistics</a>
+            <a class="button-active" href="/voting/stats/{{question_num}}/" target="_blank">Show Statistics</a>
         </div>
 
         <!-- spacer -->

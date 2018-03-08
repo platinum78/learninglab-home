@@ -24,27 +24,29 @@
         You uploaded {{ filename }}, and the file looks like this. <br>
         The numbers in the left are added automatically by our system, not included in your file. <br><br>
 
-        <table style="width: 100%; font-size: 13px; text-align: center;">
-            <tr>
+        <table style="width: 100%; font-size: 13px; text-align: center; border: 1px solid black;">
+            <tr style="border: 1px solid black;">
                 <th></th>
-                <th>Affiliation</th>
-                <th>Major</th>
-                <th>Grade</th>
-                <th>ID Number</th>
-                <th>English Name</th>
-                <th>Korean Name</th>
-                <th>E-Mail</th>
+                <th style="border: 1px solid black;">Affiliation</th>
+                <th style="border: 1px solid black;">Major</th>
+                <th style="border: 1px solid black;">Grade</th>
+                <th style="border: 1px solid black;">iCampus ID</th>
+                <th style="border: 1px solid black;">ID Number</th>
+                <th style="border: 1px solid black;">English Name</th>
+                <th style="border: 1px solid black;">Korean Name</th>
+                <th style="border: 1px solid black;">E-Mail</th>
             </tr>
             {% for student in students %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{affiliation|index:student}}</td>
-                    <td>{{major|index:student}}</td>
-                    <td>{{grade|index:student}}</td>
-                    <td>{{id_num|index:student}}</td>
-                    <td>{{eng_name|index:student}}</td>
-                    <td>{{kor_name|index:student}}</td>
-                    <td>{{email|index:student}}</td>
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;">{{forloop.counter}}</td>
+                    <td style="border: 1px solid black;">{{affiliation|index:student}}</td>
+                    <td style="border: 1px solid black;">{{major|index:student}}</td>
+                    <td style="border: 1px solid black;">{{grade|index:student}}</td>
+                    <td style="border: 1px solid black;">{{icampus_id|index:student}}</td>
+                    <td style="border: 1px solid black;">{{id_num|index:student}}</td>
+                    <td style="border: 1px solid black;">{{eng_name|index:student}}</td>
+                    <td style="border: 1px solid black;">{{kor_name|index:student}}</td>
+                    <td style="border: 1px solid black;">{{email|index:student}}</td>
                 </tr>
             {% endfor %}
         </table>

@@ -15,7 +15,8 @@ sys.path.append('/home/susung/LearningLab_Basecamp/LL_Basecamp')
 # adjust the Python version in the line below as needed
 sys.path.append('/home/susung/LearningLab_Basecamp/env_django')
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "LL_Basecamp.settings")
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "LL_Basecamp.settings")
+os.environ["DJANGO_SETTINGS_MODULE"] = "LL_Basecamp.settings"
 
 try:
     application = get_wsgi_application()

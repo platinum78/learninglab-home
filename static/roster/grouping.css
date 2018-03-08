@@ -1,0 +1,7 @@
+tr.list {
+    background-color:                   #f2f7ff;
+}
+
+tr.list:hover {
+    background-color:                   #cfe0fc;
+}
