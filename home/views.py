@@ -212,39 +212,39 @@ def accounterror(request):
     accounterror_html = loader.get_template("registration/accounterror.html")
     return HttpResponse(accounterror_html.render(context, request))
 
-def select_date_class(request):
-    year_range = list(range(2010, 2030))
-    month_range = list(range(1, 13))
-    day_range = list(range(1, 32))
-    context = {
-        'year_range': year_range,
-        'month_range': month_range,
-        'day_range': day_range,
-        'classes': EM2_classes,
-    }
-    date_class_html = loader.get_template("home/date_class.html")
-    return HttpResponse(date_class_html.render(context, request))
-
-def dateclass_redirect(request):
-    try:
-        year = request.POST["year"]
-        month = request.POST["month"]
-        day = request.POST["day"]
-        class_num = request.POST["class"]
-    except:
-        pass
-    date = year + month + day
-    return redirect('/classreport/date=%s/class=%s' % (str(date), str(class_num)))
-
-def classreport(request, date, class_num):
-    return HttpResponse('Hello, world!')
-    """
-    classstat_html = loader.get_template('home/classstat.html')
-    context = {
-        'class_num': class_num,
-    }
-    return HttpResponse(classstat_html.render(context, request))
-    """
+# def select_date_class(request):
+#     year_range = list(range(2010, 2030))
+#     month_range = list(range(1, 13))
+#     day_range = list(range(1, 32))
+#     course = Course.objects.get(is_active=True)
+#     context = {
+#         'year_range': year_range,
+#         'month_range': month_range,
+#         'day_range': day_range,
+#     }
+#     date_class_html = loader.get_template("home/date_class.html")
+#     return HttpResponse(date_class_html.render(context, request))
+#
+# def dateclass_redirect(request):
+#     try:
+#         year = request.POST["year"]
+#         month = request.POST["month"]
+#         day = request.POST["day"]
+#         class_num = request.POST["class"]
+#     except:
+#         pass
+#     date = year + month + day
+#     return redirect('/classreport/date=%s/class=%s' % (str(date), str(class_num)))
+#
+# def classreport(request, date, class_num):
+#     return HttpResponse('Hello, world!')
+#     """
+#     classstat_html = loader.get_template('home/classstat.html')
+#     context = {
+#         'class_num': class_num,
+#     }
+#     return HttpResponse(classstat_html.render(context, request))
+#     """
 
 def roster_upload(request):
     # show the list of courses
@@ -345,8 +345,12 @@ def select_course(request):
 def course_selection_handler(request):
     course_token = request.POST["course_token"]
     course = Course.objects.get(course_token=course_token)
-    if course != Course.objects.get(is_active=True):
-        Course.close_all()
+    try:
+        if course != Course.objects.get(is_active=True):
+            Course.close_all()
+            course.is_active = True
+            course.save()
+    except Course.DoesNotExist:
         course.is_active = True
         course.save()
     return redirect("home:faculty")
@@ -400,8 +404,6 @@ def student_calibration_handler(request):
         return redirect("home:calibration_result")
     else:
         return redirect("home:student_calibration")
-
-
 
 def calibration_result(request):
     calibration_result_html = loader.get_template("home/calibration_result.html")

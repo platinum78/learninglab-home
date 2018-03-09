@@ -7,9 +7,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}" />
 </head>
 <body>
+    <!-- title bar -->
     <div class="titlebar_global"><center>Student Home</center></div>
+
+    <!-- navigation bar -->
     <div class="navigationbar_global">
-        <a href="{% url 'home:student' %}">Student Home</a>
+        <a class="navigationtext" href="{% url 'home:student' %}">Student Home</a>
     </div>
 
     <div class="content_global">

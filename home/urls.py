@@ -46,8 +46,5 @@ urlpatterns = [
     # handler urls
     ################################################################
     path('accounterror/', views.accounterror, name="accounterror"),
-    path('classreport/selectdateclass/', views.select_date_class, name="selectdateclass"),
-    path('classreport/selectdateclass/select/', views.dateclass_redirect, name="parsedateclass"),
-    path('classreport/date=<int:date>/class=<int:class_num>/', views.classreport),
     path('faculty/sysstat/classinit/calibrate/parse/', views.student_calibration_handler, name="student_calibration_handler"),
 ]

@@ -179,6 +179,32 @@ a.fancy-link:hover, a.fancy-link:hover:visited {
     margin:                     10px;
 }
 
+a.navigationtext, a.navigationtext:visited {
+    display:                    inline-flex;
+    align-items:                center;
+    justify-content:            center;
+    text-decoration:            none;
+    font-family:                Arial, Helvetical, sans-serif;
+    background-color:           #009f9f;
+    color:                      white;
+    padding:                    3px 5px;
+    border-radius:              5px;
+    font-size:                  15px;
+}
+
+a.navigationtext:hover, a.navigationtext:visited:hover {
+    display:                    inline-flex;
+    align-items:                center;
+    justify-content:            center;
+    text-decoration:            none;
+    font-family:                Arial, Helvetical, sans-serif;
+    background-color:           white;
+    color:                      #009f9f;
+    padding:                    3px 5px;
+    border-radius:              5px;
+    font-size:                  15px;
+}
+
 .activewindow, .activewindow:visited {
     display:                    flex;
     justify-content:            center;

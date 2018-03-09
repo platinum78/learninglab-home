@@ -8,11 +8,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
 </head>
 <body>
-    <div class="titlebar_global"><center>Type question number...</center></div>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Questions Management</div>
+
+    <!-- navigation bar -->
     <div class="navigationbar_global">
-        <a href="{% url 'home:faculty' %}">Faculty Home</a> >
-        <a href="{% url 'questionmonitor:index' %}">Question Management</a>
-         > Lecture {{lecture_num}}
+        <a class="navigationtext" href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a class="navigationtext" href="{% url 'questionmonitor:index' %}">Question Management</a>
     </div>
     <div class="content_global">
         You can activate or deactivate problems here.

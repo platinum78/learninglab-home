@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Class Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/sysstat.css' %}">
+</head>
+<body>
+    <!-- titlebar -->
+    <div class="titlebar_global"><center>Class Management</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a class="navigationtext" href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a class="navigationtext" href="">Class Management</a> </div>
+
+    <!-- main content -->
+    <div class="content_global">
+        <center>You're logged in as a faculty member.</center> <br>
+        <h1><center>Class {{class_num}} Reports</center></h1>
+
+        <!-- class report -->
+        <div class="reportbox">
+            <div class="hline-heavy"></div>
+
+            <h3 class="report">Achievement </h3>
+            <li>1<sup>st</sup> vote: </li>
+            <li>2<sup>nd</sup> vote: </li>
+            <li>Correct > Wrong: </li>
+            <li>Wrong > Correct: </li>
+            <div class="button-report">Details</div>
+
+            <div class="hline-light"></div>
+
+            <h3 class="report">Presence: {{ present_rate }}%</h3>
+            <span style="font-size: 10px;">
+                * Presence/absence is inferred from the voting data. <br>
+                * See details to check past data. <br>
+            </span>
+            <table style="width: 100%; text-align: center; background-color: black;">
+                <tr>
+                    <th style="width: 50%; background-color: grey; color: white; padding: 10px 0px;">Present Students</th>
+                    <th style="width: 50%; background-color: grey; color: white; padding: 10px 0px;">Absent Student</th>
+                </tr>
+                <tr>
+                    <td style="background-color: lightgrey; padding: 10px 10px;">
+                        {% for student in present_roster %}
+                            {{student.name_text_korean}} <br>
+                        {% endfor %}
+                    </td>
+                    <td style="background-color: lightgrey; padding: 10px 10px;">
+                        {% for student in absent_roster %}
+                            {{student.name_text_korean}} <br>
+                        {% endfor %}
+                    </td>
+            <div class="button-report">Details</div>
+
+            <div class="hline-light"></div>
+
+            <h3 class="report">Group Composition</h3>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -50,11 +50,10 @@ class Response(models.Model):
     answer_2 = models.IntegerField(default=0)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     responder = models.ForeignKey(Student, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
 # utility functions
 ################################################
-
-
 def question_initialization(question_cnt):
     Question.objects.all().delete()
     for question in range(question_cnt):

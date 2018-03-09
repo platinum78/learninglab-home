@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Select Problem</title>
+    <title>Select Date and Class</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
@@ -8,53 +8,46 @@
 </head>
 <body>
     <!-- title bar -->
-    <div class="titlebar_global"><center>Select the Problem</center></div>
+    <div class="titlebar_global"><center>Select Date and Class</center></div>
 
     <!-- navigation bar -->
     <div class="navigationbar_global">
         <a href="{% url 'home:faculty' %}">Faculty Home</a> >
-        <a href="">Select the Problem</a>
+        <a href="">Select Date and Class</a>
     </div>
 
     <!-- main contents -->
     <div class="content_global" style="display: block;">
         <center>Welcome, {{instructor_name}} !<br>
         You're logged in as a faculty member.</center> <br>
-        No question is active now. <br>
-        Please choose the question you want to monitor. <br>
-        <form action="{% url 'home:excelsend' %}" method="post">
+        <form action="{% url 'stats:select_date_handler' %}" method="post">
             <div style="display: flex; flex-direction: row; margin: 0px 10%;
             width: auto; height: 100px; font-size: 20px; align-items: center;">
                 <div style="width: 30%; height: auto;">
                     {% csrf_token %}
                     Year:
-                    <select class="dropbox" name="year" style="width: 180px;" value="{{this_year}}">
+                    <select class="dropbox" name="year" style="width: 150px;">
                         {% for year in year_range %}
                             <option value="{{ year }}">{{ year }} </option>
                         {% endfor %}
                     </select>
                 </div>
                 <div style="width: 40%; height: auto;">
-                    Semester:
-                    <select class="dropbox" name="semester" style="width: 200px;">
-                        {% for semester in semesters %}
-                            <option value="{{ semester }}">{{ semester }} </option>
+                    Month:
+                    <select class="dropbox" name="month" style="width: 150px;">
+                        {% for month in month_range %}
+                            <option value="{{ month }}">{{ month }} </option>
                         {% endfor %}
                     </select>
                 </div>
                 <div style="width: 30%; height: auto;">
-                    Class:
-                    <select class="dropbox" name="class" style="width: 200px;">
-                        {% for class in classes %}
-                            <option value="{{ class }}">Class {{ class }} </option>
+                    Day:
+                    <select class="dropbox" name="day" style="width: 150px;">
+                        {% for day in day_range %}
+                            <option value="{{ day }}">{{ day }} </option>
                         {% endfor %}
                     </select>
                 </div>
-            </div>
-
-            <!-- file upload -->
-            <div style="display: flex; justify-content: center;">
-                <input class="pickfile" type="file" name="excel" accept="xls|xlsx">
             </div>
             <div> <button class="logoutbox_global" type="submit">Select!</button> </div>
         </form>

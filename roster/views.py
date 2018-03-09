@@ -34,3 +34,6 @@ def grouping_manual(request):
         "course_title": course.title(),
     }
     return HttpResponse(grouping_manual_html.render(context, request))
+
+def grouping_handler(request):
+    pass
