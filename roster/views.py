@@ -8,8 +8,13 @@ from courses.models import *
 # Create your views here.
 def index(request):
     # return HttpResponse("Welcome! You're in the roster index page.")
-    html = loader.get_template('roster/index.html')
-    return HttpResponse(html.render())
+    course = Course.objects.get(is_active=True)
+    full_roster = Student.objects.filter(enrolled_course=course)
+    index_html = loader.get_template('roster/index.html')
+    context = {
+        "full_roster": full_roster,
+    }
+    return HttpResponse(index_html.render(context, request))
 
 def set_groups(request):
     groups_html = loader.get_template("roster/set_groups.html")
@@ -28,12 +33,16 @@ def grouping_manual(request):
         student_numbers.append(student.id_text)
 
     context = {
-        "names": names,
-        "student_numbers": student_numbers,
-        "students": list(range(len(full_roster))),
+        # "names": names,
+        # "student_numbers": student_numbers,
+        # "students": list(range(len(full_roster))),
         "course_title": course.title(),
+        "full_roster": full_roster,
     }
     return HttpResponse(grouping_manual_html.render(context, request))
 
 def grouping_handler(request):
-    pass
+    for student in Student.objects.all():
+        student.group_num = request.POST[student.id_text]
+        student.save()
+    return HttpResponse("Group addition finished!")

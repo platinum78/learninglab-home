@@ -1,10 +1,48 @@
-<html lang="ko">
+<html>
 <head>
-  <title>:::::: LearningLab Student Management ::::::</title>
+    <title>Group Settings - Manual</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <!-- {% load home_tags %} -->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'roster/grouping.css' %}">
 </head>
 <body>
-  <div style="color: white; background-color: tomato; padding: 10px;">
-    <h1 style="font: NanumGothic">LearningLab Student Roster</h1>
-  </div>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Student Roster</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a class="navigationtext" href="{% url 'home:faculty' %}">Faculty Home</a>
+    </div>
+
+    <!-- main contents -->
+    <div class="content_global">
+        <center>Welcome, {{instructor_name}} !<br>
+        You're logged in as a faculty member of {{course_title}}.</center> <br>
+
+        <table style="width: 100%; font-size: 13px; text-align: center; background-color: black;">
+            <tr style="border: 1px solid black; height: 30px; background-color: grey; color: white;">
+                <th>No.</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Group</th>
+            </tr>
+            {% for student in full_roster %}
+                <tr style="border: 1px solid black; background-color: #e0e0e0; height: 25px;">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{student.id_text}}</td>
+                    <td>{{student.name_text_korean}}</td>
+                    <td>{{student.group_num}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        </form>
+    </div>
+
+    <!-- logout box -->
+    <a class="logoutbox_global" href="{% url 'home:logout' %}">Logout</a>
+
 </body>
 </html>

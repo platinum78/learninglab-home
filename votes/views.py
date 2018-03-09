@@ -74,7 +74,10 @@ def index(request):
 ################################################
 def response(request):
     q = Question.find_active()
-    selected_choice = request.POST['choice']
+    try:
+        selected_choice = request.POST['choice']
+    except:
+        return redirect('votes:index')
     course = Course.objects.get(is_active=True)
 
     if request.user.is_authenticated != True:

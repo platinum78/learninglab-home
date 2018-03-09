@@ -30,16 +30,17 @@
                     <th>Name</th>
                     <th>Group</th>
                 </tr>
-                {% for student in students %}
+                {% for student in full_roster %}
                     <tr style="border: 1px solid black; background-color: #e0e0e0; height: 25px;">
                         <td>{{forloop.counter}}</td>
-                        <td>{{student_numbers|index:student}}</td>
-                        <td>{{names|index:student}}</td>
-                        <td><input type="text" name="{{student_numbers|index:student}}"
-                            style="text-align: center; width: 60px;" /></td>
+                        <td>{{student.id_text}}</td>
+                        <td>{{student.name_text_korean}}</td>
+                        <td><input type="text" name="{{student.id_text}}"
+                            value="{{student.group_num}}" style="text-align: center; width: 60px;" /></td>
                     </tr>
                 {% endfor %}
             </table>
+            <button class="rectbutton" type="submit">Submit</button>
         </form>
     </div>
 

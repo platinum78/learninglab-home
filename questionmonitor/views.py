@@ -34,10 +34,9 @@ def index(request):
     questionquery = Question.objects.all().order_by("question_num")
     has_response = OrderedDict()
     for question in questionquery:
-        try:
-            Response.objects.get(course=course, question=question)
+        if Response.objects.filter(course=course, question=question).count() != 0:
             has_response[question.question_num] = True
-        except Response.DoesNotExist:
+        else:
             has_response[question.question_num] = False
     index_html = loader.get_template('questionmonitor/question_num.html')
     num = list(range(Question.objects.all().count()))

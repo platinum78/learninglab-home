@@ -9,10 +9,9 @@
 <body>
     <div class="titlebar_global"><center>Question Switch</center></div>
     <div class="navigationbar_global">
-        <a href="{% url 'home:faculty' %}">Faculty Home</a> >
-        <a href="{% url 'questionmonitor:index' %}">Question Switch</a> >
-        <a href="/faculty/questionmonitor/{{lecture_num}}/">Lecture {{lecture_num}}</a> >
-         Qustion {{question_num}}
+        <a class="navigationtext" href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a class="navigationtext" href="{% url 'questionmonitor:index' %}">Question Switch</a> >
+        <a class="navigationtext" href="">Qustion {{question_num}}</a>
     </div>
     <div class="content_global">
         <span style="display: block; font-size: 15; text-align: center; font-weight: bold;">You can activate or deactivate problems here.</span>
