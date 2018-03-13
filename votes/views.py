@@ -7,8 +7,8 @@ from roster.models import Student
 from django.contrib.auth.models import User
 
 
-# Create your views here.
-################################################
+# Displays the voting screen.
+# Nothing will be shown if there is no active question.
 def index(request):
     current_user = request.user
     try:

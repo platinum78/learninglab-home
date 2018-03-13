@@ -22,7 +22,7 @@ from courses.models import *
 
 from collections import OrderedDict
 
-# Create your views here.
+# Creates and displays statistics of selected question.
 def question_stats(request, question):
     c = Course.find_active_course()
     q = Question.objects.get(question_num=question)
@@ -59,6 +59,23 @@ def question_stats(request, question):
     question_stats_html = loader.get_template('stats/question_stats.html')
     return HttpResponse(question_stats_html.render(context, request))
 
+# Performs presence check.
+def presence_check(date):
+    # presence check screen
+    year, month, day = date[0], date[1], date[2]
+    course = Course.objects.get(is_active=True)
+    full_roster = Student.objects.filter(enrolled_course=course)
+    present_roster = []
+    absent_roster = []
+    present_rate = len(present_roster) / len(full_roster)
+    time_range = [timezone.datetime(year,month,day,0,0), timezone.datetime(year,month,day,23,59)]
+    for student in full_roster:
+        if Response.objects.filter(timestamp__range=time_range, responder=student).count() != 0:
+            present_roster.append(student)
+        else:
+            absent_roster.append(student)
+    return present_roster, absent_roster, present_rate
+
 def select_date(request):
     year_range = list(range(2010, 2030))
     month_range = list(range(1, 13))
@@ -94,19 +111,3 @@ def classreport(request, year, month, day):
         "present_rate": present_rate*100,
     }
     return HttpResponse(classreport_html.render(context, request))
-
-def presence_check(date):
-    # presence check screen
-    year, month, day = date[0], date[1], date[2]
-    course = Course.objects.get(is_active=True)
-    full_roster = Student.objects.filter(enrolled_course=course)
-    present_roster = []
-    absent_roster = []
-    present_rate = len(present_roster) / len(full_roster)
-    time_range = [timezone.datetime(year,month,day,0,0), timezone.datetime(year,month,day,23,59)]
-    for student in full_roster:
-        if Response.objects.filter(timestamp__range=time_range, responder=student).count() != 0:
-            present_roster.append(student)
-        else:
-            absent_roster.append(student)
-    return present_roster, absent_roster, present_rate

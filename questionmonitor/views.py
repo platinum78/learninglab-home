@@ -7,8 +7,10 @@ from courses.models import *
 from django.contrib.auth.models import User, AnonymousUser
 from collections import OrderedDict
 
-# Create your views here.
 
+
+# Displays the questions screen.
+# URL: https://sdl.skku.edu/questionmonitor/
 def index(request):
     # reject request if not affiliated to instructor group
     ############################################################
@@ -49,12 +51,18 @@ def index(request):
     }
     return HttpResponse(index_html.render(context, request))
 
+# Handles the red-round killswitch.
+# Deactivates active question if exists, does nothing if there is no active
+# question.
 def killswitch(request):
     try:
-        Question.find_active(deactivate=True)
+        Question.close_all()
     except Question.DoesNotExist:
         return redirect("questionmonitor:index")
 
+# Displays the screen with "activate" and "statistics" button.
+# The "activate" button togges from inactive to first vote, then second vote,
+# and then inactive again.
 def show_state(request, question_num):
     state_html = loader.get_template('questionmonitor/show_state.html')
     q = Question.objects.get(question_num=question_num)

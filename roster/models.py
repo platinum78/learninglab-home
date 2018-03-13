@@ -4,7 +4,9 @@ import pandas
 import numpy as np
 from courses.models import *
 
-# Create your models here.
+""" DO NOT MODIFY THE MODELS WITHOUT SUFFICIENT BACKGROUND ON DATABASES """
+
+# Student table
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,
                                 null=True, default=None)

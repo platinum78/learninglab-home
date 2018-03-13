@@ -14,7 +14,8 @@ from votes.models import *
 import datetime, os, pandas, string, random
 # from somewhere import handle_uploaded_file
 
-# Create your views here.
+# Displays the index (login) screen.
+# URL: https://sdl.skku.edu/voting/
 def index(request):
     context = {}
     if request.user != AnonymousUser():
@@ -33,6 +34,10 @@ def index(request):
     homepage_html = loader.get_template('home/index_login.html')
     return HttpResponse(homepage_html.render(context, request))
 
+# Displays the student home. The login handler will authenticate the user, find
+# the user from the student and faculty list. If the user is found from the
+# students list, he/she will be redirected to this page.
+# URL: https://sdl.skku.edu/student/
 def student(request):
     try:
         student_html = loader.get_template('home/student.html')
@@ -45,6 +50,8 @@ def student(request):
     except Student.DoesNotExist:
         return redirect("home:invalid")
 
+# Displays the faculty home. Works same as student view.
+# URL: https://sdl.skku.edu/faculty/
 def faculty(request):
     try:
         Faculty.objects.get(user=request.user)
@@ -80,6 +87,8 @@ def faculty(request):
     except Faculty.DoesNotExist:
         return redirect("home:invalid")
 
+# Shows the visitor home. Works same as student view.
+# URL: https://sdl.skku.edu/visitor/
 def visitor(request):
     try:
         Student.objects.get(user=request.user)
@@ -90,11 +99,14 @@ def visitor(request):
     except Student.DoesNotExist:
         return redirect("home:invalid")
 
+# Blocks when user or non-logged-in-user requests for unauthorized page.
 def invalid_request(request):
     invalid_request_html = loader.get_template('registration/invalid_request.html')
     context = {}
     return HttpResponse(invalid_request_html.render(context, request))
 
+# Shows the account information of the student. If the initial roster file did
+# not include enough information, all fields might seem blank.
 def student_accountinfo(request):
     # find the student info from roster.models.Student model
     ################################################################
@@ -121,7 +133,9 @@ def student_accountinfo(request):
     student_accountinfo_html = loader.get_template('home/student_accountinfo.html')
     return HttpResponse(student_accountinfo_html.render(context, request))
 
-#@csrf_exempt
+# Handles login requests. The handler gets username and password from the login
+# form, and then finds the user from the student and faculty list. If there is
+# a matching user, it redirects the user to the appropriate main page.
 def login_(request):
     user_id = request.POST['userid']
     user_pw = request.POST['userpw']
@@ -143,6 +157,8 @@ def login_(request):
     except Faculty.DoesNotExist:
         return redirect("home:user404")
 
+# Log-outs the user. If the user was a faculty member, all courses will be
+# deactivated.
 def logout_(request):
     # deactivate all courses and questions, if the instructor logs out
     ################################################################
@@ -174,11 +190,16 @@ def logout_(request):
 
     return HttpResponse(logout_html.render(context, request))
 
+# This happens when there is no matching user. For convenience, this screen is
+# integrated with temporary account creation form. If a visitor enters his
+# student number, it will be temporarily added to the student list and marked as
+# a visitor. A visitor can only respond to questions.
 def user404(request):
     context = {}
     user404_html = loader.get_template('registration/user404.html')
     return HttpResponse(user404_html.render(context, request))
 
+# Adds temporary user to student list.
 def visitor_handler(request):
     # create 15-digit arbitrary password
     charbank = string.ascii_uppercase + string.ascii_lowercase + string.digits
@@ -196,17 +217,20 @@ def visitor_handler(request):
         login(request, user_login)
     return redirect("home:visitor")
 
+# If the user was a visitor, this deletes the information of the visitor at
+# logout. Voting responses the visitor has made are not affected.
 def anonymoususer_logout(request):
     user = request.user
     user.logout(request)
     user.delete()
 
+# Displays the system status. For now, deprecated from usage.
 def sysstat(request):
-    # load
     sysstat_html = loader.get_template('home/sysstat.html')
     context = {}
     return HttpResponse(sysstat_html.render(context, request))
 
+#
 def accounterror(request):
     context = {}
     accounterror_html = loader.get_template("registration/accounterror.html")
@@ -246,6 +270,8 @@ def accounterror(request):
 #     return HttpResponse(classstat_html.render(context, request))
 #     """
 
+# Displays the course initialization screen.
+# This screen allows the instructor upload an Excel(R) file.
 def roster_upload(request):
     # show the list of courses
     ################################################################
@@ -266,6 +292,9 @@ def roster_upload(request):
     }
     return HttpResponse(roster_upload_html.render(context, request))
 
+# Handles the upload operation of selected Excel(R) file.
+# This function SHOULD be used in development server mode, due to security
+# concerns.
 def excel_upload_handler(request):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     if request.method == "POST" and request.FILES['excel']:
@@ -274,6 +303,8 @@ def excel_upload_handler(request):
             io.write(excel.read())
         return redirect('/faculty/sysstat/classinit/%s/preview/' % excel.name)
 
+# Shows how well the Excel(R) file fits with required format.
+# The instructor might accept it, or revise from the beginning.
 def excelpreview(request, filename):
     roster, student_cnt = excel_read(file_name=filename)
     context = {
@@ -292,6 +323,8 @@ def excelpreview(request, filename):
     excelpreview_html = loader.get_template("home/excel_preview.html")
     return HttpResponse(excelpreview_html.render(context, request))
 
+# If the instructor accepts the views from excelpreview(), Django writes the
+# data in the Excel(R) file to the database.
 def register_students_handler(request, file_name):
     data, student_cnt = excel_read(file_name=file_name)
     course = Course.objects.get(is_active=True)
@@ -312,6 +345,7 @@ def register_students_handler(request, file_name):
         student.save()
     return redirect("home:register_result")
 
+# Displays how many students are newly registered to the database.
 def student_registration_result(request):
     course = Course.objects.get(is_active=True)
     student_cnt = course.student_set.all().count()
@@ -323,6 +357,9 @@ def student_registration_result(request):
     reg_result_html = loader.get_template("home/register_result.html")
     return HttpResponse(reg_result_html.render(context, request))
 
+# Displays the course selection screen.
+# When there is no active course, this is the first screen that the instructor
+# will se when login.
 def select_course(request):
     # show the list of courses
     ################################################################
@@ -342,6 +379,9 @@ def select_course(request):
     }
     return HttpResponse(select_course_html.render(context, request))
 
+# Receives the (course) selection from the course selection screen, and looks
+# for the course. The dropdown of course selection screen returns the course
+# token, in order to make it easier to find the course.
 def course_selection_handler(request):
     course_token = request.POST["course_token"]
     course = Course.objects.get(course_token=course_token)
@@ -355,11 +395,15 @@ def course_selection_handler(request):
         course.save()
     return redirect("home:faculty")
 
+# Displays the password-changing screen.
+# Currently this function is incomplete; the developer has stopped while
+# dealing with password validators.
 def student_change_password(request):
     context = {}
     student_change_password_handler = loader.get_template("home/change_password.html")
     return HttpResponse(student_change_password_handler.render(context, request))
 
+# Handler for changing password. This function is also incomplete.
 def student_password_handler(request):
     current_user = request.user
     cpwd, npwd = request.POST["cpwd"], request.POST["npwd"]
