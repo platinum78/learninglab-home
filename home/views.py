@@ -117,6 +117,7 @@ def student_accountinfo(request):
         student_id = current_student.id_text
         name_english = current_student.name_text_english
         name_korean = current_student.name_text_korean
+        group_num = current_student.group_num
     except Student.DoesNotExist:
         # handle exception raised from absence of student info
         # make code for error message,
@@ -129,6 +130,7 @@ def student_accountinfo(request):
         'student_id': student_id,
         'name_english': name_english,
         'name_korean': name_korean,
+        'group_num': group_num,
     }
     student_accountinfo_html = loader.get_template('home/student_accountinfo.html')
     return HttpResponse(student_accountinfo_html.render(context, request))

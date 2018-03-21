@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title>Excel Preview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    {% load home_tags %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'global/global.css' %}">
+</head>
+<body>
+    <!-- title bar -->
+    <div class="titlebar_global"><center>Select Date and Class</center></div>
+
+    <!-- navigation bar -->
+    <div class="navigationbar_global">
+        <a href="{% url 'home:faculty' %}">Faculty Home</a> >
+        <a href="">Select Date and Class</a>
+    </div>
+
+    <!-- main contents -->
+    <div class="content_global" style="display: block;">
+        <center>Welcome, {{instructor_name}} !<br>
+        You're logged in as a faculty member.</center> <br> <br>
+        You uploaded {{ filename }}, and the file looks like this. <br>
+        The numbers in the left are added automatically by our system, not included in your file. <br><br>
+
+        <table style="width: 100%; font-size: 13px; text-align: center; border: 1px solid black;">
+            <tr style="border: 1px solid black;">
+                <th></th>
+                <th style="border: 1px solid black;">ID Number</th>
+                <th style="border: 1px solid black;">English Name</th>
+                <th style="border: 1px solid black;">Korean Name</th>
+                <th style="border: 1px solid black;">iCampus ID</th>
+            </tr>
+            {% for student in students %}
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;">{{forloop.counter}}</td>
+                    <td style="border: 1px solid black;">{{id_num|index:student}}</td>
+                    <td style="border: 1px solid black;">{{eng_name|index:student}}</td>
+                    <td style="border: 1px solid black;">{{kor_name|index:student}}</td>
+                    <td style="border: 1px solid black;">{{icampus_id|index:student}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <center><h3 class="report">Do you like it? </h3></center>
+        <div style="display: flex; justify-content: center;">
+            <a class="rectbutton-inline" href="/faculty/sysstat/classinit/parse/filename={{filename}}/">Accept</a>
+            <a class="rectbutton-inline" href="{% url 'home:roster_upload' %}">Revise</a>
+        </div>
+    </div>
+
+</body>
+</html>
